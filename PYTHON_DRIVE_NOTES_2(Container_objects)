@@ -1,0 +1,677 @@
+Container_Objects.py
+1.Dictionary.py
+
+from collections import OrderedDict
+from collections import defaultdict
+
+# Different ways of constructing a dictionary.
+d = {}
+d = dict()
+d = dict(Bangalore=25, Chennai=35, Delhi=30)
+d = dict([("Bangalore", 25), ("Chennai", 35), ("Delhi", 30)])
+d = dict(zip(["Bangalore", "Chennai", "Delhi"], [25, 35, 30]))
+d = dict({'Bangalore': 25, "Chennai": 35, "Delhi": 30})
+
+print(len(d))    # Prints the length of the dictionary
+
+# Accessing elements of a dictionary
+print(d['Bangalore'])
+print(d.get('Bangalore'))
+
+# list inside the dictionary as values.
+location = {'country': 'India', 'states': ['Karnataka', 'Anrda', 'Kerala']}
+
+# points
+points = {'a': 1, 'b': 2, 'c': 3}
+
+# Nested Dictionary
+prices = {'IBM': {'current': 90.1, 'low': 88.3, 'high': 92.7}, 'HP': {"current": 29.70, "low": 28.30, "high": 31.2} }
+
+# accessing inner dictionary
+print(prices['IBM']['current'])
+print(prices['IBM']['high'])
+
+# Accessing a key that does not exist
+# print(employee['age'])      # Throws exception KeyError: 'age'
+print(d.get('Noida'))      # get() method Does not throw an exception, but returns 'None'
+print(d.get('Noida', 'The Key not found in the dictionary'))   # Throws exception KeyError: 'age'
+
+# Adding / Updating the dictionary
+d['Mysore'] = 26.5  # Upadting the dictionary key with new value
+d['Bangalore'] = 27.0
+
+# Appending items to the list which is value of the key 'states'
+location['states'].append("Gujrat")
+location['states'].append("Maharastra")
+
+# Incrementing value of key 'a'
+points['a'] = points['a'] + 1
+points['a'] += 1
+
+# Adding a new key value pair
+points['d'] = 1
+points['d'] = points['d'] + 1
+
+# Looping through Key's and Value's of the Dictionary
+print(d.items())     # Returns a tuple of key,value pairs
+
+for item in d:      # Prints only key's of the dictionary
+    print(item)
+    
+for item in d:
+    print(d[item])   # Prints Values of the dictionary
+
+for key, value in d.items():     # Tuple un-packing
+    print(key, value)
+
+for key in d.keys():
+    print(key)
+
+for value in d.values():
+    print(value)
+
+for index, items in enumerate(d.items()):
+    print(index, items)
+
+# Count number of words in a sentence
+sentence = 'hello world hello world welcome to python'
+words = sentence.split()
+
+word_count = {}
+for word in words:
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+print(word_count)
+
+# Using get method
+word_count = {}
+for word in words:
+    word_count[word] = word_count.get(word, 0) + 1
+
+"""
+1. This creates a new dictionary using our colors as keys, with all values set to 0 initially.
+2. This allows us to increment each key without worrying whether it has been set.
+"""
+for name in names:
+    _count[name] += 1
+
+# using defaultDict
+word_count = defaultdict(int)
+for word in words:
+    word_count[word] += 1
+
+# Counting number of characters in a string
+s = 'abracadabraca'
+char_count = {}
+for c in s:
+    if c in char_count:
+        char_count[c] += 1
+    else:
+        char_count[c] = 1
+
+# Counting number of vowels in a string
+s = 'hello world welcome to python'
+vowels = {}
+for c in s:
+    if c in 'aeiou':
+        if c in vowels:
+            vowels[c] +=1
+        else:
+            vowels[c] = 1
+print(vowels)
+
+# defaultDict
+# 1. Creats a key if the key does not exist
+# 2. Initialise the value to Zero in case of defaultdict of int's
+# 3. Returns the value which is zero
+
+# Counting occurances of word in the string
+sentence = "hello world welcome to python hello hi hello hello"
+word_count = defaultdict(int)
+words = sentence.split()
+for word in words:
+    word_count[word] += 1
+
+# Counting occurances of each character in the string
+s = 'abracadabraca'
+chr_count = defaultdict(int)
+for c in s:
+    chr_count[c] += 1
+
+# 1. Creats a key if the key does not exist
+# 2. Initialise the value to empty list in case of defaultdict of list
+# 3. Returns the empty list
+
+profile = defaultdict(list)     # One to Many Mapping
+profile['language'].append('Java')
+profile['language'].append('Python')
+
+cities = [('India', 'Bangalore'),
+          ('India', 'Chennai'),
+          ('India', 'Delhi'),
+          ('India', 'Kolkata'),
+          ('USA', 'Dallas'),
+          ('USA', 'New York'),
+          ('USA', 'Chicago'),
+          ('China', 'Bejing'),
+          ('China', 'Shaingai')
+          ]
+
+dd = defaultdict(list)
+for country, city in cities:
+    dd[country].append(city)
+
+# Composite Keys
+# Dictionary key must be of Immutable Type. e.g
+# Dict keys should always be Hashable. (All immutable objects are Hashable)
+holidays = {
+    (26, 1): 'Republic Day',
+    (15, 8): 'Independance Day',
+    (25, 6): 'Yoga Day'
+}
+
+# Deleting the key and value
+d.popitem()      # Returns and deletes the last key/value pair in the dictionary
+print(d.pop('age'))    # Returns and Deletes the mentioned key from the dictionary
+# del employee['age']     # Deletes the Key 'age' and its value
+
+
+# Merging Dictionaries
+d1 = {'fname': 'steve', 'lname': 'jobs'}
+d2 = {'age': 56, 'company': 'apple'}
+
+d3 = {**d1, **d2}
+
+
+# Using fromkeys method
+names = ['apple', 'google', 'yahoo', 'gmail', 'google', 'apple']
+_count = dict.fromkeys(names, 0)
+
+# OrderedDict
+# Ordered Dictonary Maintains Order
+d = OrderedDict()
+d['apple'] = 'A'
+d['google'] = 'G'
+d['yahoo'] = 'Y'
+
+for key, value in d.items():
+    print(key, value)
+
+
+
+
+2.lists.py
+
+
+from itertools import zip_longest
+
+# PYTHON LISTS
+"""
+0. Objects that hold reference to the other objects are called containers
+1. Lists are Mutable
+2. Elements in the Lists are Ordered
+3. Lists can hold duplicate elements
+4. Lists can be indexed by integers starting zero
+5. Lists are heterogeneous in nature. (They can point to any kind of objects)
+"""
+
+# Creating an List
+my_list = []
+my_list = [1, 2, 3, 4, 5]
+my_list = list()    # Using list constructor
+my_list = list('helloworld')
+my_list = list([1, 2, 3, 4, 5])
+
+names = ['apple', 'google', 'yahoo', 'amazon', 'facebook', 'instagram', 'microsoft']
+
+print(names)    # Prints the items of the List
+print(len(names))       # Prints the Length of the List. Index starts from Zero.
+print(names[0])     # Prints the item present in the 0th index of the List.
+
+
+# Adding elements to the List
+names.append('gmail')   # Adding element to the list
+names.insert(3, 'watsapp')      # Inserts the item at 3rd index.
+
+# Extends the exisitng list with the items of the new list
+names.extend(['netflix', 'walmart', 'kroger'])
+
+a = ["apple", "google", "yahoo"]
+b = ["gmail", "flipkart", "facebook"]
+# Merging two different lists
+c = a + b
+c = [*a, *b]
+
+print('gmail' in names)     # Prints True if the item is present in the list
+
+# Removing Items from the List
+names.remove('kroger')  # Removes the item 'kroger' from the List
+names.pop()     # By default this will remove the last item in the List
+# pop method returns the item that it has removed from the List
+names.pop(3)    # Removes the item in the 3rd index of the List
+
+del names[0]    # Deletes 0th item in the list
+# del names[3:6]  # Deletes 3rd, 4th and 5th items in the list
+# del names[::2]  # Deletes alternate items in the list
+# del names   # Deletes the reference to the list "names"
+# del names       # Deletes the entire list
+
+# Making copy of the list (Shallow Copy!!!)
+a = [1, 2, 3, 4, 5]
+b = a.copy()
+  # OR
+b = a[:]
+
+# 6_Sorting List's
+names.sort()    # Sorts the List in Alphabetical Order
+# sort method modifies the list inplace.
+names.sort(reverse=True)    # Sorts the List in Decending Order
+
+sorted(names)   # Sorts the List in Alphabetical Order and returns a new list.
+# sorted method does not alter the existing list.
+
+sorted(names, reverse=True)     # Sorts the List in Decending Order
+
+names.index('google')       # Returns the index of the item in the List
+
+print('yahoo' in names)    # Returns True if the item present in the List
+
+# Iterating through the List (pythonic approach)
+for item in names:
+    print(item)
+
+# Prints the item and its corresponding index in the list (Pythonic approach)
+for index, item in enumerate(names):    # enumerate returns a tuple of index, item pair
+    print(index, item)
+
+# Using range function (not preferred method)
+for index in range(0, len(names)):
+    print(names[index])
+
+# Printing Index and Item using range function (not preferred method)
+for index in range(0, len(names)):
+    print(index, names[index])
+
+# Printing alternate items of the list (Pythonic approach)
+for name in names[::2]:
+    print(name)
+
+# Printing alternate items of the list using range function (not preferred method)
+for index in range(0, len(names), 2):
+    print(names[index])
+
+# Iterating over a part of the list
+for item in names[:4]:
+    print(item)
+
+for index, item in enumerate(names, start=1):   # Index starts from 1
+    print(index, item)
+
+# ================================================================================
+# Iterating over multiple lists simultaniously
+cities = ['Tokyo', 'Delhi', 'Shanghai', 'Sao Paulo', 'Mumbai']
+population = ['38,001,000', '25,703,168', '23,740,778', '21,066,245', '21,042,538']
+
+# Iterating through multiple list Non-Pythonic approach
+for i in range(len(cities)):
+    print(cities[i], population[i])
+
+# Iterating through multiple list using zip function
+for city, population in zip(cities, population):
+    print(city, population)
+
+# Iterating through multiple list with un-equal lengths using zip function
+a = [1, 2, 3]
+b = ['v', 'w', 'x', 'y', 'z']
+
+for i in zip(a, b):
+    print(i)    # Prints (1, 'v'), (2, 'w'), (3, 'x')
+    # zip function stops at the shortest list
+
+for i in zip_longest(a, b):
+    print(i)    # Prints (1, 'v'), (2, 'w'), (3, 'x'), (None, y), (None, z)
+
+for i in zip_longest(a, b, fillvalue='NA'):
+    print(i)    # Prints (1, 'v'), (2, 'w'), (3, 'x'), ('NA', y), ('NA', z)
+
+a = [1, 2, 3]
+b = ['x', 'y', 'z']
+c = ['alpha', 'beta', 'gamma']
+
+for i in zip(a, b, c):
+    print(i)    # Prints (1, 'x', 'alpha'), (2, 'y', 'beta'), (3, 'y', 'gamma')
+# ================================================================================
+
+files = ['youtube.txt', 'amazon.pdf', 'facebook.pdf', 'google.pdf', 'apple.doc']
+for file in files:
+    if file.endswith('pdf'):
+        print(file)
+
+# ===========OR==========
+for file in files:
+    if file[-3:] == 'pdf':
+        print(file)
+
+filenames = ['youtube.txt', 'amazon.pdf', 'facebook.pdf', 'google.py', 'apple.doc']
+# Multiple conditions in startswith and endswith function
+for filename in filenames:
+    if filename.endswith(('txt', 'pdf')):   # filename either endswith txt or pdf
+        # startswith and endswith can take tuple as an argument
+        print(filename)
+
+# Converting Lists to String
+print('-'.join(names))  # Prints yahoo-netflix-microsoft-instagram-google-gmail-facebook-apple-amazon
+print('|'.join(names))  # Prints yahoo|netflix|microsoft|instagram|google|gmail|facebook|apple|amazon
+print(','.join(names))  # Prints yahoo,netflix,microsoft,instagram,google,gmail,facebook,apple,amazon
+
+# Slicing List's
+# names[start:stop:step]
+names = ['apple', 'google', 'yahoo', 'amazon', 'facebook', 'instagram', 'microsoft']
+#       [   0         1         2       3           4           5           6      ]
+#       [  -7        -6        -5      -4          -3          -2          -1      ]
+print(names[2:5])   # Prints all the items from 2nd index upto but not including 5th index.
+print(names[:4])    # Prints all items from 0th index and upto 4th index, but not including 4th index.
+print(names[2:])    # Prints all items from 2nd index till the end of the List.
+
+# Expression inside square brackets
+print(names[1 + 3])  # Prints 4th item of the list
+print(names[1 - 3])  # Prints 5th item of the list
+
+# Slicing using negative indexing
+print(names[-1])    # Prints the last index item of the list
+print(names[-7])    # Prints the 0th index item of the list
+print(names[-4:-2])     # Prints ['amazon', 'facebook']
+print(names[-6:5])      # prints ['google', 'yahoo', 'amazon', 'facebook', 'instagram']
+print(names[1:-1])      # prints ['google', 'yahoo', 'amazon', 'facebook', 'instagram']
+print(names[:-1])   # Prints ['apple', 'google', 'yahoo', 'amazon', 'facebook', 'instagram']
+
+print(names[:])     # Prints the entire list
+print(names[::2])   # Prints alternate items in the list
+print(names[::-1])  # Prints the items in the list in reverse order
+
+print(names[::2])   # Prints alternate items in the list
+print(names[2:7:2])
+print(names[-1:2:-1])
+print(names[::-1])      # Prints the list in Reverse order
+
+names[:2] = ['unknown', 'Unknown']  # Replacing Multiple items in the list
+print(names)
+
+# Print the extension of each file name in the list
+files = ['youtube.txt', 'yahoo.pdf', 'microsoft.doc', 'apple.xls', 'amazon.xml']
+for file in files:
+    print(file[-3:])
+# =========================================================================================
+
+3.Namestuples.py
+
+from collections import namedtuple
+
+"""
+1. Two parameters are required to create a named tuple: 
+a class name and a list of field names, which can be given as an 
+iterable of strings or as a single space- delimited string.
+2. Data must be passed as positional arguments to the constructor
+ (in contrast, the tuple constructor takes a single iterable).
+3. You can access the fields by name or position.
+4. They use less memory than a regular object because they don’t store 
+    attributes in a per-instance __dict__.
+"""
+
+Employee = namedtuple("Employee", ['fname',  'lname', 'pay'])
+
+e1 = Employee("steve", "jobs", 1000)
+e2 = Employee("bill", "gates", 2000)
+
+# Accessing values using field names
+print(e1.fname)
+print(e1.lname)
+print(e1.pay)
+
+# Accessing values using indexing
+print(e1[0])
+print(e1[1])
+print(e1[2])
+
+# length of the namedtuple
+print(len(e1))
+
+
+4.sets.py
+
+"""
+Sets are Python's builtin data type which has the following characterstics
+   1. Sets are unordered
+   2. Elements inside the sets are unique
+   3. Sets are mutable, but elements inside the set must be hashable
+   4. Sets cannot be indexed or sliced
+
+Hashable Objects:
+Hashable objects are the objects which implements __hash__ magic method and
+hash() method can be called.
+
+All Immutable objects are hashable, but all hashable objects are not immutable
+
+Python Sets can only include hashable objects
+
+"""
+
+# Operations on Set
+a = {1, 2, 3, 3, 4}
+print(len(a))   # Prints the Length of the Set
+
+# Membership test
+1 in a  # Prints True if the item is in a
+
+# Set Union
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+a.union(b)  # Prints {1, 2, 3, 4, 5, 6}
+
+c = {6, 7, 8, 9}
+
+a.union(b, c)   # Prints {1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+# Set Intersection
+a.intersection(b)   # Returns a new set {3, 4}
+
+# Set Difference
+# Returns a new set with the elements in set a which are not in b
+a.difference(b)
+# a - b   # Prints {1, 2}
+
+a = {1, 2, 3, 30, 300}
+b = {10, 20, 30, 40}
+c = {100, 200, 300, 400}
+a.difference(b, c)  # Returns a new set {1, 2, 3}
+# a - b - c
+
+# isdisjoint()
+# Returns True if there are no items in common between two sets
+x = {1, 2, 3}
+y = {2, 3, 5}
+x.isdisjoint(y)     # Returns False
+
+x1 = {1, 3, 5}
+x2 = {2, 4, 6}
+x1.isdisjoint(x2)
+
+# issubset()
+# A set is considered a subset of another set if every element of the first set is
+# in the second
+a = {1}
+b = {1, 2}
+c = {1, 2, 3}
+d = {1, 2, 4}
+
+a.issubset(b)   # Returns True
+b.issubset(c)   # Returns True
+c.issubset(d)   # Returns False
+
+# Modifying a Set add()
+a = {'apple', 'yahoo', 'google'}
+a.add('facebook')
+
+# remove()
+a.remove("apple")
+# Element must exist in the set. Otherwise python throws key Error
+
+# discard()
+# Removes an element from the set.
+# If the element does not exist, Key error is not thrown
+a.discard("apple")
+
+# pop()
+# Removes and returns a random item from the set
+# Throws KeyError if the set is empty
+a.pop()
+
+# clear()
+# removes all the elements from the set
+a.clear()
+
+# update()
+a = {1, 2}
+b = {3, 4}
+a.update(b)     # a = {1, 2, 3, 4}
+
+# intersection_update()
+# Modify a set by retaining only elements found in both sets
+a = {1, 2, 3}
+b = {2, 3, 4}
+a.intersection_update(b)    # Prints {2, 3}
+
+a = {1, 2, 3}
+b = {2}
+a.difference_update(b)  # Prints {1, 3}
+
+
+5.tuples.py
+
+"""
+1. Tuples are Im-Mutable. The elements of the tuple cannot be changed/replaced/deleted/appended after creation.
+2. Elements in the Tuples are Ordered
+3. Tuples can hold duplicate elements
+4. Tuples can be indexed by integers starting zero
+5. Tuples are heterogeneous in nature. (They can point to any kind of objects)
+"""
+
+# Creating a tuple object
+t = ()  # Creates an empty tuple
+t = tuple()     # Using tuple constructor
+t = (1, )       # Single item tuple.
+t = (1, 2, 3, 4, 5)     # Tuple of Integer objects.
+info = ("steve", "jobs", 1000)
+address = ("www.python.org", 80)
+
+# list of tuples
+temperatures = [("bangalore", 26), ("delhi", 30), ("mumbai", 32), ("kolkatta", 29)]
+
+
+6.Membership_speed_comparision_list_tuple_set.py
+
+import time
+
+def _time(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(end-start)
+        return result
+    return wrapper
+
+l = list(range(1000000))
+
+@_time
+def test_list():
+    999999 in l
+
+s = set(range(1000000))
+
+@_time
+def test_set():
+    999999 in s
+
+t = tuple(range(1000000))
+
+@_time
+def test_tuple():
+    999999 in t
+
+test_list()
+test_tuple()
+test_set()
+
+
+
+7.shallow copy deep copy pdf upload
+
+8.shallow copy deep copy.py
+"""
+Two types of copy operations are applied to container objects such as lists and dictionaries:
+a shallow copy and a deep copy. 
+A shallow copy creates a new object, but populates it with references to the same items contained in the original object.
+"""
+
+a = [1, 2, [10, 20]]
+
+# create a copy of a
+b = a.copy()
+
+# "a" and "b" are pointing to two different objects
+print(a is b) # False
+
+a.append(3)  # 3 is appended to the list "a" but not to list "b"
+
+a[2].append(30)     # 30 gets appeneded to the internal list, which is shared by both "a" and "b"
+
+print(a)    # [1, 2, [10, 20, 30]]
+print(b)    # [1, 2, [10, 20, 30]]
+
+# A deep copy creates a new object and copies all the objects it contains.
+from copy import deepcopy
+a = [1, 2, [10, 20]]
+b = deepcopy(a)
+
+print(a is b)       # False
+
+a[2].append(30)     # a = [1, 2, [10, 20, 30]]
+
+print(b)        # b = [1, 2, [10, 20]] 
+
+
+9.spped_comparision_list_tuple.py
+
+import time
+
+def _time(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(end-start)
+        return result
+    return wrapper
+
+@_time
+def test_tuple():
+    for i in range(1000000):
+        pass
+
+@_time
+def test_list():
+    for i in range(1000000):
+        pass
+
+test_list()
+test_tuple()
+
+
+
+
+
+
